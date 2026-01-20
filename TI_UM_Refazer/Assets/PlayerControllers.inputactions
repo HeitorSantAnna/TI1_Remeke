@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RocketsSelectGamePad",
+                    "type": "Button",
+                    "id": "bbed6e88-14b8-40c4-94e9-0a2b26b52d65",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -57,9 +66,31 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "up",
+                    "id": "bd65d2c8-bac2-4d23-8cf8-a726903beb9f",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moves",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "down",
                     "id": "08cdef9d-c3e6-4f9c-a007-e7ce41072a92",
                     "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moves",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "a1961384-e3db-40f3-b121-cb87d05e0636",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -79,9 +110,31 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "left",
+                    "id": "3eb9f12b-f8d6-4ccc-a633-8f93388ee1b5",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moves",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "right",
                     "id": "385e26e0-181a-4dc8-8c80-971150580c6e",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moves",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "66ab146a-964b-477e-b90f-2413fa71fec0",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -212,34 +265,34 @@
                 },
                 {
                     "name": "1D Axis",
-                    "id": "84675697-6750-4614-b8fc-201a80e43a3e",
+                    "id": "4f6dbc4b-7858-43bf-9396-f06ce0c7127b",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RocketsSelect",
+                    "action": "RocketsSelectGamePad",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "negative",
-                    "id": "a2059321-063f-4f8f-ab64-b2d991f4454e",
+                    "id": "0f940c24-5057-4632-b2d5-595fc984467f",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RocketsSelect",
+                    "action": "RocketsSelectGamePad",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
-                    "id": "e7e8d978-f6e8-4c8a-969f-8ba0ab46ecfd",
+                    "id": "cc93a983-08a6-40a0-b634-46aef94a24a0",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RocketsSelect",
+                    "action": "RocketsSelectGamePad",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

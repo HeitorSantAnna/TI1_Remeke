@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -8,13 +9,11 @@ public class BulletController : MonoBehaviour
     [SerializeField] int indiceBullet = 0;
     [SerializeField] float timer = 0;
 
-    [SerializeField] bool disparo, One, Two, Tree, Four;
-
-    [SerializeField] float Left, Right;
+    [SerializeField] bool disparo;
 
     //Aqui vou colocar uma referencia da imagem, o tiro normal ia já ficar disponivel e o resto (quando ficarem disponiveis) iniciaram carregando com uma imagem preto e branco e começa a carregar quando carregar vai dar uma piscada e um som que indica que está disponivel
 
-    [SerializeField] Image Normalrocket;
+    [SerializeField] Image[] Rocketcooldown = new Image[4];
 
     //Rocket Thunder
     //Ele causara um curto que cancelara todas as habilidades e também travará as naves
@@ -27,66 +26,44 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-        Normalrocket.fillAmount = 1;
+        Rocketcooldown[0].fillAmount = 1;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            indiceBullet = 0;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            indiceBullet = 1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            indiceBullet = 2;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            indiceBullet = 3;
-        }
-
-        // Aqui vou fazer a referencia da imagem para quando o tiro for dado e estiver recarregando
-
         if (disparo)
         {
-            Normalrocket.fillAmount = 0;
-            Debug.Log("Hello World!");
-        }
-
-        //Aqui vou fazer o script da recarga
-
-        if(Normalrocket.fillAmount == 0)
-        {
-            Normalrocket.fillAmount += Time.time;
-        }
-
-        //Até aqui
-
-        if (disparo)
-        {
-            Debug.Log("Disparado");
             Disparo();
-            timer = 5;
         }
 
-        if(timer > 0)
+        if(Rocketcooldown[0].fillAmount < 1)
         {
-            timer -= Time.deltaTime;
+            Rocketcooldown[0].fillAmount += Time.deltaTime;
+        } 
+        
+        if(Rocketcooldown[1].fillAmount < 1)
+        {
+            Rocketcooldown[1].fillAmount += Time.deltaTime / 2;
+        }
+
+        if (Rocketcooldown[2].fillAmount < 1)
+        {
+            Rocketcooldown[2].fillAmount += Time.deltaTime / 3;
+        }
+
+        if (Rocketcooldown[3].fillAmount < 1)
+        {
+            Rocketcooldown[3].fillAmount += Time.deltaTime / 4;
         }
     }
 
     void Disparo()
     {
-        if (Normalrocket.fillAmount >= 1)
+        if (Rocketcooldown[indiceBullet].fillAmount >= 1)
         {
             Instantiate(Bullets[indiceBullet], transform.position, transform.rotation);
+
+            Rocketcooldown[indiceBullet].fillAmount = 0;
         }
     }
 
@@ -97,8 +74,6 @@ public class BulletController : MonoBehaviour
 
     public void Selection(InputAction.CallbackContext value)
     {
-        Debug.Log($"Essa tecla foi pressionada {value.control.name}");
-
         if(value.control.displayName == "1")
         {
             indiceBullet = 0;
@@ -115,19 +90,24 @@ public class BulletController : MonoBehaviour
         {
             indiceBullet = 3;
         }
-        else if(value.control.name == "Left Shoulder")
+    }
+
+    public void SelectionGamePad(InputAction.CallbackContext value)
+    {
+        if(!value.performed)
         {
-            if(indiceBullet > 0)
-            {
-                indiceBullet = value.ReadValue<int>();
-            }
+            return;
         }
-        else if (value.control.name == "rightShoulder")
+
+        float valor = value.ReadValue<float>();
+
+        if(valor > 0.5f && indiceBullet != 3)
         {
-            if(indiceBullet < 3)
-            {
-                indiceBullet = value.ReadValue<int>();
-            }
+            indiceBullet += 1;
+        }
+        else if(valor < -0.5f && indiceBullet != 0)
+        {
+            indiceBullet -= 1;
         }
     }
 }

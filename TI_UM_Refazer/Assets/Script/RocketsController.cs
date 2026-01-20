@@ -14,7 +14,7 @@ public class RocketsController : MonoBehaviour
 
     void Update()
     {
-        recarga = BulletController.indiceBullet;
+       // recarga = BulletController.indiceBullet;
 
         
     }

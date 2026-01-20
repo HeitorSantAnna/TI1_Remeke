@@ -15,10 +15,6 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("BulletE"))
-        {
-            Destroy(other.gameObject);
             Destroy(gameObject);
-        }
     }
 }

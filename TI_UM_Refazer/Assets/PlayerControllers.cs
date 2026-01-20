@@ -117,6 +117,15 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RocketsSelectGamePad"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbed6e88-14b8-40c4-94e9-0a2b26b52d65"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,9 +152,31 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""up"",
+                    ""id"": ""bd65d2c8-bac2-4d23-8cf8-a726903beb9f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""down"",
                     ""id"": ""08cdef9d-c3e6-4f9c-a007-e7ce41072a92"",
                     ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a1961384-e3db-40f3-b121-cb87d05e0636"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -165,9 +196,31 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""left"",
+                    ""id"": ""3eb9f12b-f8d6-4ccc-a633-8f93388ee1b5"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""right"",
                     ""id"": ""385e26e0-181a-4dc8-8c80-971150580c6e"",
                     ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""66ab146a-964b-477e-b90f-2413fa71fec0"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -298,34 +351,34 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""1D Axis"",
-                    ""id"": ""84675697-6750-4614-b8fc-201a80e43a3e"",
+                    ""id"": ""4f6dbc4b-7858-43bf-9396-f06ce0c7127b"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RocketsSelect"",
+                    ""action"": ""RocketsSelectGamePad"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""a2059321-063f-4f8f-ab64-b2d991f4454e"",
+                    ""id"": ""0f940c24-5057-4632-b2d5-595fc984467f"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RocketsSelect"",
+                    ""action"": ""RocketsSelectGamePad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""e7e8d978-f6e8-4c8a-969f-8ba0ab46ecfd"",
+                    ""id"": ""cc93a983-08a6-40a0-b634-46aef94a24a0"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RocketsSelect"",
+                    ""action"": ""RocketsSelectGamePad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -339,6 +392,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_Player_Moves = m_Player.FindAction("Moves", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_RocketsSelect = m_Player.FindAction("RocketsSelect", throwIfNotFound: true);
+        m_Player_RocketsSelectGamePad = m_Player.FindAction("RocketsSelectGamePad", throwIfNotFound: true);
     }
 
     ~@PlayerControllers()
@@ -422,6 +476,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Moves;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_RocketsSelect;
+    private readonly InputAction m_Player_RocketsSelectGamePad;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -445,6 +500,10 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/RocketsSelect".
         /// </summary>
         public InputAction @RocketsSelect => m_Wrapper.m_Player_RocketsSelect;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RocketsSelectGamePad".
+        /// </summary>
+        public InputAction @RocketsSelectGamePad => m_Wrapper.m_Player_RocketsSelectGamePad;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -480,6 +539,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @RocketsSelect.started += instance.OnRocketsSelect;
             @RocketsSelect.performed += instance.OnRocketsSelect;
             @RocketsSelect.canceled += instance.OnRocketsSelect;
+            @RocketsSelectGamePad.started += instance.OnRocketsSelectGamePad;
+            @RocketsSelectGamePad.performed += instance.OnRocketsSelectGamePad;
+            @RocketsSelectGamePad.canceled += instance.OnRocketsSelectGamePad;
         }
 
         /// <summary>
@@ -500,6 +562,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @RocketsSelect.started -= instance.OnRocketsSelect;
             @RocketsSelect.performed -= instance.OnRocketsSelect;
             @RocketsSelect.canceled -= instance.OnRocketsSelect;
+            @RocketsSelectGamePad.started -= instance.OnRocketsSelectGamePad;
+            @RocketsSelectGamePad.performed -= instance.OnRocketsSelectGamePad;
+            @RocketsSelectGamePad.canceled -= instance.OnRocketsSelectGamePad;
         }
 
         /// <summary>
@@ -561,5 +626,12 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRocketsSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RocketsSelectGamePad" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRocketsSelectGamePad(InputAction.CallbackContext context);
     }
 }

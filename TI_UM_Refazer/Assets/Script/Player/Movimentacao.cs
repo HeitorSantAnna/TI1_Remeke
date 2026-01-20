@@ -9,10 +9,6 @@ public class Movimentacao : MonoBehaviour
 
     [SerializeField] Vector2 move;
 
-    public Slider slider;
-
-    float energy = 10, life = 3;
-
     void Start()
     {
         
