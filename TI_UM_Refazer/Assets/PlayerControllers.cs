@@ -126,6 +126,15 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CamMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""8352a126-c297-4b11-9451-90ab90bc42d5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -381,6 +390,116 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""action"": ""RocketsSelectGamePad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""GamePad"",
+                    ""id"": ""491fd48a-61ea-43c0-8051-e51e5fc04f7e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c3131fe9-5053-46ee-9282-805f3cf39315"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""729666b3-c43f-43f2-af9a-6c9b12ce05d0"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e914a113-418f-416e-b281-13075d5347eb"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f343b06c-e44f-43eb-8e3f-6bed0e196170"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""KeyPad"",
+                    ""id"": ""535f6b3d-7011-45ec-8729-7d1dd3d0b863"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""fc99d031-2eb0-455d-9b2b-a92b1c3a9d90"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""95ac2323-97e0-446d-815c-70067ba181c6"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""78c08135-4223-424f-9e93-4a948e7dd34c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0615ea0f-4530-4a83-ba14-39581a9a2ac6"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -393,6 +512,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_RocketsSelect = m_Player.FindAction("RocketsSelect", throwIfNotFound: true);
         m_Player_RocketsSelectGamePad = m_Player.FindAction("RocketsSelectGamePad", throwIfNotFound: true);
+        m_Player_CamMove = m_Player.FindAction("CamMove", throwIfNotFound: true);
     }
 
     ~@PlayerControllers()
@@ -477,6 +597,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_RocketsSelect;
     private readonly InputAction m_Player_RocketsSelectGamePad;
+    private readonly InputAction m_Player_CamMove;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -504,6 +625,10 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/RocketsSelectGamePad".
         /// </summary>
         public InputAction @RocketsSelectGamePad => m_Wrapper.m_Player_RocketsSelectGamePad;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/CamMove".
+        /// </summary>
+        public InputAction @CamMove => m_Wrapper.m_Player_CamMove;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -542,6 +667,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @RocketsSelectGamePad.started += instance.OnRocketsSelectGamePad;
             @RocketsSelectGamePad.performed += instance.OnRocketsSelectGamePad;
             @RocketsSelectGamePad.canceled += instance.OnRocketsSelectGamePad;
+            @CamMove.started += instance.OnCamMove;
+            @CamMove.performed += instance.OnCamMove;
+            @CamMove.canceled += instance.OnCamMove;
         }
 
         /// <summary>
@@ -565,6 +693,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @RocketsSelectGamePad.started -= instance.OnRocketsSelectGamePad;
             @RocketsSelectGamePad.performed -= instance.OnRocketsSelectGamePad;
             @RocketsSelectGamePad.canceled -= instance.OnRocketsSelectGamePad;
+            @CamMove.started -= instance.OnCamMove;
+            @CamMove.performed -= instance.OnCamMove;
+            @CamMove.canceled -= instance.OnCamMove;
         }
 
         /// <summary>
@@ -633,5 +764,12 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRocketsSelectGamePad(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CamMove" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCamMove(InputAction.CallbackContext context);
     }
 }
