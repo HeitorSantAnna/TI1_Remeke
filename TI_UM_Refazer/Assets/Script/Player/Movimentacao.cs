@@ -1,3 +1,4 @@
+using System;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,22 +10,25 @@ public class Movimentacao : MonoBehaviour
 
     [SerializeField] Vector2 move, rodar;
 
+    [SerializeField] Camera cam;
+
     void Start()
     {
         
     }
 
-    //Ajustar a movimentação de camera e trabalhar nos VFX
+    //Ajustar a movimentação (talvez colocar a camera filha do player????) de camera e trabalhar nos VFX
+    //Colocar para que quando a camera se movimentar o player rotacionar
 
     void Update()
     {
         //Aqui vou tentar fazer um novo sistema de movimentação
-
-        transform.position += (transform.forward * move.y * Time.deltaTime * speed) + (transform.right * move.x * Time.deltaTime * speed);
+        transform.position += (cam.transform.forward * move.y * Time.deltaTime * speed) + (transform.right * move.x * Time.deltaTime * speed);
 
         //Aqui vou fazer o sistema de rotação para ajudar
+        transform.Rotate(rodar.y, rodar.x, 0);
 
-        transform.Rotate(rodar.y, 0, 0);
+        Debug.Log($"{DateTime.Now}");
     }
 
     public void Moves(InputAction.CallbackContext value)
