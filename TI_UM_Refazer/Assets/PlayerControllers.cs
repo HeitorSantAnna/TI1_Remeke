@@ -135,6 +135,15 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Commands"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b31df3d-7e3e-4c4b-a22e-00ac15d7bc45"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -445,6 +454,56 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
                     ""action"": ""CamMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e1b7181-2d0b-4e95-8575-3a10ee342470"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Commands"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7bb9407-a1d3-4766-a943-6ab64832ec10"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Commands"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Teste"",
+            ""id"": ""df770c65-53b9-4ae3-ba56-37248e149f96"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c0d441e-90d7-4674-935d-50df322d2b34"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""68a4693a-4c94-4d31-a357-6461e0c8b841"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -458,11 +517,16 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         m_Player_RocketsSelect = m_Player.FindAction("RocketsSelect", throwIfNotFound: true);
         m_Player_RocketsSelectGamePad = m_Player.FindAction("RocketsSelectGamePad", throwIfNotFound: true);
         m_Player_CamMove = m_Player.FindAction("CamMove", throwIfNotFound: true);
+        m_Player_Commands = m_Player.FindAction("Commands", throwIfNotFound: true);
+        // Teste
+        m_Teste = asset.FindActionMap("Teste", throwIfNotFound: true);
+        m_Teste_Newaction = m_Teste.FindAction("New action", throwIfNotFound: true);
     }
 
     ~@PlayerControllers()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerControllers.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Teste.enabled, "This will cause a leak and performance issues, PlayerControllers.Teste.Disable() has not been called.");
     }
 
     /// <summary>
@@ -543,6 +607,7 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RocketsSelect;
     private readonly InputAction m_Player_RocketsSelectGamePad;
     private readonly InputAction m_Player_CamMove;
+    private readonly InputAction m_Player_Commands;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -574,6 +639,10 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/CamMove".
         /// </summary>
         public InputAction @CamMove => m_Wrapper.m_Player_CamMove;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Commands".
+        /// </summary>
+        public InputAction @Commands => m_Wrapper.m_Player_Commands;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -615,6 +684,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @CamMove.started += instance.OnCamMove;
             @CamMove.performed += instance.OnCamMove;
             @CamMove.canceled += instance.OnCamMove;
+            @Commands.started += instance.OnCommands;
+            @Commands.performed += instance.OnCommands;
+            @Commands.canceled += instance.OnCommands;
         }
 
         /// <summary>
@@ -641,6 +713,9 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
             @CamMove.started -= instance.OnCamMove;
             @CamMove.performed -= instance.OnCamMove;
             @CamMove.canceled -= instance.OnCamMove;
+            @Commands.started -= instance.OnCommands;
+            @Commands.performed -= instance.OnCommands;
+            @Commands.canceled -= instance.OnCommands;
         }
 
         /// <summary>
@@ -674,6 +749,102 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Teste
+    private readonly InputActionMap m_Teste;
+    private List<ITesteActions> m_TesteActionsCallbackInterfaces = new List<ITesteActions>();
+    private readonly InputAction m_Teste_Newaction;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Teste".
+    /// </summary>
+    public struct TesteActions
+    {
+        private @PlayerControllers m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public TesteActions(@PlayerControllers wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Teste/Newaction".
+        /// </summary>
+        public InputAction @Newaction => m_Wrapper.m_Teste_Newaction;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Teste; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="TesteActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(TesteActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="TesteActions" />
+        public void AddCallbacks(ITesteActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TesteActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TesteActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="TesteActions" />
+        private void UnregisterCallbacks(ITesteActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="TesteActions.UnregisterCallbacks(ITesteActions)" />.
+        /// </summary>
+        /// <seealso cref="TesteActions.UnregisterCallbacks(ITesteActions)" />
+        public void RemoveCallbacks(ITesteActions instance)
+        {
+            if (m_Wrapper.m_TesteActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="TesteActions.AddCallbacks(ITesteActions)" />
+        /// <seealso cref="TesteActions.RemoveCallbacks(ITesteActions)" />
+        /// <seealso cref="TesteActions.UnregisterCallbacks(ITesteActions)" />
+        public void SetCallbacks(ITesteActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TesteActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TesteActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="TesteActions" /> instance referencing this action map.
+    /// </summary>
+    public TesteActions @Teste => new TesteActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -716,5 +887,27 @@ public partial class @PlayerControllers: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCamMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Commands" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCommands(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Teste" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="TesteActions.AddCallbacks(ITesteActions)" />
+    /// <seealso cref="TesteActions.RemoveCallbacks(ITesteActions)" />
+    public interface ITesteActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

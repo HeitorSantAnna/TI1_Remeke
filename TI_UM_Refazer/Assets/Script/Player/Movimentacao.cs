@@ -12,6 +12,8 @@ public class Movimentacao : MonoBehaviour
 
     [SerializeField] Camera cam;
 
+    public PlayerInfo playerData;
+
     void Start()
     {
         
@@ -27,8 +29,6 @@ public class Movimentacao : MonoBehaviour
 
         //Aqui vou fazer o sistema de rotação para ajudar
         transform.Rotate(rodar.y, rodar.x, 0);
-
-        Debug.Log($"{DateTime.Now}");
     }
 
     public void Moves(InputAction.CallbackContext value)
@@ -39,5 +39,21 @@ public class Movimentacao : MonoBehaviour
     public void Rodar(InputAction.CallbackContext value)
     {
         rodar = value.ReadValue<Vector2>();
+    }
+
+    public void Sincronize()
+    {
+        playerData = new PlayerInfo();
+
+        playerData.position = transform.position;
+    }
+
+    public void Load(PlayerInfo data)
+    {
+        playerData = new PlayerInfo();
+
+        playerData = data;
+
+        transform.position = playerData.position;
     }
 }

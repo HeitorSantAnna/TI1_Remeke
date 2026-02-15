@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class BulletController : MonoBehaviour
 {
     [SerializeField] GameObject[] Bullets = new GameObject[4];
+
     [SerializeField] int indiceBullet = 0;
+
     [SerializeField] float timer = 0;
 
     [SerializeField] bool disparo;
+
+    [SerializeField] Camera cam;
 
     //Aqui vou colocar uma referencia da imagem, o tiro normal ia já ficar disponivel e o resto (quando ficarem disponiveis) iniciaram carregando com uma imagem preto e branco e começa a carregar quando carregar vai dar uma piscada e um som que indica que está disponivel
 
