@@ -6,6 +6,7 @@ using System;
 public static class SaveController
 {
     //private static string folderName = "./saves/";
+    /*
     private static string folderName = Path.Combine(Application.persistentDataPath, "saves");
     private static string fileName = "save";
 
@@ -57,6 +58,6 @@ public static class SaveController
         string path = Path.Combine(folderName, fileName + saveNumber + ".xml");
         if (!File.Exists(path)) return;
         File.Delete(path);
-    }
+    }*/
 
 }

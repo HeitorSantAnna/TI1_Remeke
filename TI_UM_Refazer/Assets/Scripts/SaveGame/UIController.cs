@@ -6,7 +6,7 @@ public class UIController : MonoBehaviour
 {
     /*public TMP_Text timeText;
 
-    [SerializeField] TextMeshProUGUI textMesh;*/
+    [SerializeField] TextMeshProUGUI textMesh;
 
     void Update()
     {
@@ -27,6 +27,6 @@ public class UIController : MonoBehaviour
     public void DeleteGame(int saveNumber)
     {
         SaveController.DeleteGame(saveNumber);
-    }
+    }*/
 
 }
